@@ -1,0 +1,23 @@
+{
+  "name": "node-https-request",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamesNgo-CoT/node-https-request.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JamesNgo-CoT/node-https-request/issues"
+  },
+  "homepage": "https://github.com/JamesNgo-CoT/node-https-request#readme",
+  "devDependencies": {
+    "eslint": "^8.3.0"
+  }
+}
