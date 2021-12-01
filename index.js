@@ -6,7 +6,7 @@ const https = require('https');
  * @param {(string|Object)} [payload]
  * @returns {Promise.<{ response: Object, data: string }, any>}
  * @example
- * httpsRequest({
+ * nodeHttpsRequest({
  * 	headers: { 'Accept': 'application/json' },
  * 	host: 'httpbin.org',
  * 	method: 'GET',
@@ -15,7 +15,7 @@ const https = require('https');
  * 	console.log(statusCode, JSON.parse(data));
  * });
  * @example
- * httpsRequest({
+ * nodeHttpsRequest({
  * 	headers: { 'Accept': 'application/json' },
  * 	host: 'httpbin.org',
  * 	method: 'POST',
