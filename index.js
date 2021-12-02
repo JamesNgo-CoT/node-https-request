@@ -2,9 +2,9 @@ const https = require('https');
 
 /**
  * A https.request wrapper function.
- * @param {Object} httpsOptions
- * @param {(string|Object)} [payload]
- * @returns {Promise.<{ response: Object, data: string }, any>}
+ * @param {object} httpsOptions
+ * @param {(string|object)} [payload]
+ * @returns {Promise.<{ response: object, data: string }, any>}
  * @example
  * nodeHttpsRequest({
  * 	headers: { 'Accept': 'application/json' },
