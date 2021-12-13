@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/JamesNgo-CoT/node-https-request#readme",
   "devDependencies": {
+    "dotenv": "^10.0.0",
     "eslint": "^8.3.0"
   }
 }

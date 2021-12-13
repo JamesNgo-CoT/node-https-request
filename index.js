@@ -44,6 +44,7 @@ module.exports = function (httpsOptions, payload) {
 			requestOptions.headers['Content-Length'] = Buffer.byteLength(payload);
 		}
 
+		let startDate;
 		const request = https.request(requestOptions, (response) => {
 			let data = '';
 
@@ -52,6 +53,10 @@ module.exports = function (httpsOptions, payload) {
 			});
 
 			response.on('end', () => {
+				if (process.env.SHOW_LOG) {
+					console.log(`\u001b[36mNODE-HTTPS-REQUEST\u001b[0m completed in \x1b[33m${new Date().getTime() - startDate.getTime()}\x1b[0mms -> \x1b[33m${response.statusCode}\x1b[0m status code -> \x1b[33m${Buffer.byteLength(data)}\x1b[0mB data`);
+				}
+
 				resolve({ response, data });
 			});
 		});
@@ -62,6 +67,13 @@ module.exports = function (httpsOptions, payload) {
 
 		if (payload) {
 			request.write(payload);
+		}
+
+		if (process.env.SHOW_LOG) {
+			startDate = new Date();
+
+			const { host, method, path, port } = requestOptions;
+			console.log(`\u001b[36mNODE-HTTPS-REQUEST\u001b[0m ${payload ? `\u001b[33m${Buffer.byteLength(payload)}\u001b[0mB payload -> ` : ''}${method} \u001b[32mhttps://${host}:${port}${path}\u001b[0m`);
 		}
 
 		request.end();
