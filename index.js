@@ -5,24 +5,6 @@ const https = require('https');
  * @param {object} httpsOptions
  * @param {(string|object)} [payload]
  * @returns {Promise.<{ response: object, data: string }, any>}
- * @example
- * nodeHttpsRequest({
- * 	headers: { 'Accept': 'application/json' },
- * 	host: 'httpbin.org',
- * 	method: 'GET',
- * 	path: '/get'
- * }).then(({ response: { statusCode }, data }) => {
- * 	console.log(statusCode, JSON.parse(data));
- * });
- * @example
- * nodeHttpsRequest({
- * 	headers: { 'Accept': 'application/json' },
- * 	host: 'httpbin.org',
- * 	method: 'POST',
- * 	path: '/post'
- * }, { test: 'test' }).then(({ response: { statusCode }, data }) => {
- * 	console.log(statusCode, JSON.parse(data));
- * });
  */
 module.exports = function (httpsOptions, payload) {
 	return new Promise((resolve, reject) => {
@@ -32,15 +14,14 @@ module.exports = function (httpsOptions, payload) {
 			port: 443
 		}, httpsOptions);
 
-		if (payload) {
+		if (payload != null) {
 			if (typeof payload === 'object') {
-				payload = JSON.stringify(payload);
-
 				if (!requestOptions.headers['Content-Type']) {
 					requestOptions.headers['Content-Type'] = 'application/json';
 				}
 			}
 
+			payload = JSON.stringify(payload);
 			requestOptions.headers['Content-Length'] = Buffer.byteLength(payload);
 		}
 
@@ -48,9 +29,7 @@ module.exports = function (httpsOptions, payload) {
 		const request = https.request(requestOptions, (response) => {
 			let data = '';
 
-			response.on('data', (chunk) => {
-				data += chunk;
-			});
+			response.on('data', (chunk) => void (data += chunk));
 
 			response.on('end', () => {
 				if (process.env.SHOW_LOG) {
@@ -61,11 +40,9 @@ module.exports = function (httpsOptions, payload) {
 			});
 		});
 
-		request.on('error', (error) => {
-			reject(error);
-		});
+		request.on('error', (error) => void reject(error));
 
-		if (payload) {
+		if (payload != null) {
 			request.write(payload);
 		}
 
