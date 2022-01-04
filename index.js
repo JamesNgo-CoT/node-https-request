@@ -21,7 +21,10 @@ module.exports = function (httpsOptions, payload) {
 				}
 			}
 
-			payload = JSON.stringify(payload);
+			if (typeof payload !== 'string') {
+				payload = JSON.stringify(payload);
+			}
+
 			requestOptions.headers['Content-Length'] = Buffer.byteLength(payload);
 		}
 

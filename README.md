@@ -1,11 +1,11 @@
 # node-https-request
 
-Version 1.2.0
+Version 1.2.1
 
 ## Installation
 
 ``` console
-npm install https://github.com/JamesNgo-CoT/node-https-request.git#1.2.0
+npm install https://github.com/JamesNgo-CoT/node-https-request.git#1.2.1
 ```
 
 ## Usage
